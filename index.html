@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Drive It Austin — Fast, Flexible Car Rentals</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --black: #0a0a0a;
+      --dark: #111111;
+      --card: #181818;
+      --border: #2a2a2a;
+      --gold: #FFFF08;
+      --gold-light: #ffff4d;
+      --white: #f5f5f0;
+      --muted: #888;
+      --font-display: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      --font-body: 'DM Sans', sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: #000000;
+      border-bottom: 1px solid var(--border);
+      padding: 0 5%;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 70px;
+    }
+    nav .nav-left {
+      display: flex; align-items: center; gap: 48px;
+    }
+    nav .logo-text {
+      font-family: var(--font-display);
+      font-size: 28px;
+      font-weight: 800;
+      font-style: italic;
+      color: var(--white);
+      letter-spacing: -.02em;
+      display: flex; align-items: center;
+    }
+    nav .logo-text span { color: var(--gold); margin-left: 2px; }
+    nav .nav-links {
+      display: flex; align-items: center; gap: 32px;
+    }
+    nav .nav-links a {
+      font-family: var(--font-display);
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--white);
+      letter-spacing: .06em;
+      transition: color .2s;
+    }
+    nav .nav-links a:hover { color: var(--gold); }
+    nav .nav-cta {
+      background: var(--gold);
+      color: var(--black);
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      padding: 12px 24px;
+      border-radius: 4px;
+      transition: background .2s;
+    }
+    nav .nav-cta:hover { background: var(--gold-light); }
+
+    /* ── hero_ga ── */
+    .hero_ga {
+      position: relative;
+      max-height: 750px !important;
+      display: flex; align-items: center;
+      padding: 80px 5%;
+      overflow: hidden;
+    }
+    .hero_ga-bg {
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(135deg, rgba(10,10,10,0.97) 0%, rgba(10,10,10,0.80) 60%, rgba(10,10,10,0.60) 100%),
+        url('https://static.wixstatic.com/media/53fd1a_2d416c66363049e3887f6e924db07b6d~mv2.jpg/v1/fill/w_1400,h_800,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/53fd1a_2d416c66363049e3887f6e924db07b6d~mv2.jpg') center/cover no-repeat;
+    }
+    .hero_ga-bg::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 60% at 70% 50%, rgba(255,255,8,0.08) 0%, transparent 70%);
+    }
+    .hero_ga-content {
+      position: relative; z-index: 2;
+      max-width: 720px;
+    }
+    .hero_ga-eyebrow {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+      padding: 6px 14px;
+      border: 1px solid rgba(201,168,76,0.35);
+      border-radius: 2px;
+    }
+    .hero_ga h1 {
+      font-family: var(--font-display);
+      font-size: clamp(44px, 7vw, 80px);
+      line-height: .95;
+      letter-spacing: -.02em;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 24px;
+    }
+    .hero_ga h1 em {
+      font-style: normal;
+      color: var(--gold);
+    }
+    .hero_ga-sub {
+      font-size: 18px;
+      font-weight: 300;
+      color: #c0c0b8;
+      max-width: 520px;
+      margin-bottom: 36px;
+      line-height: 1.65;
+    }
+    .hero_ga-checks {
+      display: flex; flex-wrap: wrap; gap: 10px 24px;
+      margin-bottom: 40px;
+    }
+    .hero_ga-checks span {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--white);
+      display: flex; align-items: center; gap: 7px;
+    }
+    .hero_ga-checks span::before {
+      content: '✓';
+      color: var(--gold);
+      font-weight: 700;
+      font-size: 15px;
+    }
+    .hero_ga-ctas { display: flex; align-items: center; flex-wrap: wrap; gap: 14px; margin-bottom: 28px; }
+    .btn-primary {
+      background: var(--gold);
+      color: var(--black);
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: .04em;
+      padding: 16px 34px;
+      border-radius: 4px;
+      border: none; cursor: pointer;
+      transition: background .2s, transform .15s;
+      display: inline-block;
+    }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+    .btn-ghost {
+      color: var(--white);
+      font-weight: 500;
+      font-size: 15px;
+      display: flex; align-items: center; gap: 8px;
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+      transition: border-color .2s, color .2s;
+    }
+    .btn-ghost:hover { color: var(--gold); border-color: var(--gold); }
+    .hero_ga-note {
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: .04em;
+    }
+    .hero_ga-note span { color: #666; margin: 0 6px; }
+
+    /* ── TRUST STRIP ── */
+    .trust {
+      background: var(--dark);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 20px 5%;
+    }
+    .trust-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: center;
+      flex-wrap: wrap; gap: 16px 40px;
+    }
+    .trust-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-right: 8px;
+    }
+    .trust-item {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--white);
+      display: flex; align-items: center; gap: 7px;
+    }
+    .trust-item::before {
+      content: '✓';
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    /* ── SECTION WRAPPER ── */
+    .section { padding: 90px 5%; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 14px;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(32px, 4.5vw, 54px);
+      line-height: 1;
+      letter-spacing: -.02em;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 18px;
+    }
+    .section-body {
+      font-size: 16px;
+      color: #aaa;
+      max-width: 560px;
+      line-height: 1.7;
+    }
+    .gold-line {
+      width: 48px; height: 3px;
+      background: var(--gold);
+      margin-bottom: 28px;
+      border-radius: 2px;
+    }
+
+    /* ── PROBLEM / SOLUTION ── */
+    .prob-sol { background: var(--dark); }
+    .prob-sol-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3px;
+      margin-top: 56px;
+    }
+    .prob-col, .sol-col {
+      padding: 48px 40px;
+    }
+    .prob-col { background: #141414; }
+    .sol-col { background: #161610; border-left: 3px solid var(--gold); }
+    .col-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .prob-col .col-label { color: #555; }
+    .sol-col .col-label { color: var(--gold); }
+    .col-title {
+      font-family: var(--font-display);
+      font-size: 28px;
+      font-weight: 800;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      line-height: 1.05;
+      letter-spacing: -.02em;
+    }
+    .prob-col .col-title { color: #777; }
+    .sol-col .col-title { color: var(--white); }
+    .col-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .prob-col .col-list li {
+      font-size: 15px;
+      color: #666;
+      padding-left: 20px;
+      position: relative;
+    }
+    .prob-col .col-list li::before { content: '—'; position: absolute; left: 0; color: #444; }
+    .sol-col .col-list li {
+      font-size: 15px;
+      color: var(--white);
+      padding-left: 22px;
+      position: relative;
+    }
+    .sol-col .col-list li::before {
+      content: '✓';
+      position: absolute; left: 0;
+      color: var(--gold); font-weight: 700;
+    }
+
+    /* ── HOW IT WORKS ── */
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+      margin-top: 56px;
+    }
+    .step {
+      background: var(--card);
+      padding: 36px 28px;
+      position: relative;
+      border-top: 2px solid transparent;
+      transition: border-color .25s;
+    }
+    .step:hover { border-color: var(--gold); }
+    .step-num {
+      font-family: var(--font-display);
+      font-size: 64px;
+      font-weight: 800;
+      line-height: 1;
+      color: rgba(255,255,8,0.10);
+      margin-bottom: 8px;
+      display: block;
+      letter-spacing: -.03em;
+    }
+    .step-title {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: -.01em;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+    .step p { font-size: 14px; color: var(--muted); line-height: 1.65; }
+
+    /* ── VEHICLES (CARD STYLE) ── */
+    .vehicles-card-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin-top: 56px;
+    }
+    .vehicle-card {
+      position: relative;
+      height: 480px;
+      border-radius: 6px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform .3s;
+    }
+    .vehicle-card:hover { transform: translateY(-4px); }
+    .vehicle-card-price-badge {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 8, 0.3);
+      border-radius: 6px;
+      padding: 8px 14px;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    }
+    .vehicle-card-price-badge-label {
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 2px;
+      opacity: 0.9;
+    }
+    .vehicle-card-price-badge-amount {
+      font-family: var(--font-display);
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1;
+      letter-spacing: -0.01em;
+      margin-bottom: 2px;
+    }
+    .vehicle-card-price-badge-per {
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0.9;
+    }
+    .vehicle-card-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      transition: transform .3s;
+    }
+    .vehicle-card:hover .vehicle-card-bg { transform: scale(1.05); }
+    .vehicle-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        180deg,
+        rgba(0,0,0,0.2) 0%,
+        rgba(0,0,0,0.5) 50%,
+        rgba(0,0,0,0.95) 100%
+      );
+    }
+    .vehicle-card-content {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    cursor: default;
+    }
+    .vehicle-card-spacer {
+      height: 40px;
+    }
+    .vehicle-card-info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+    .vehicle-card-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+    .vehicle-card-title {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: -.02em;
+      color: var(--white);
+      margin-bottom: 6px;
+      line-height: 1.1;
+    }
+    .vehicle-card-desc {
+      font-size: 13px;
+      color: #aaa;
+      margin-bottom: 12px;
+    }
+    .vehicle-card-desc strong { color: var(--white); font-weight: 600; }
+    .vehicle-card-models {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+    .vehicle-card-models a {
+      font-size: 10px;
+      font-weight: 500;
+      color: #999;
+      padding: 4px 10px;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 2px;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: all .2s;
+    }
+    .vehicle-card-models a:hover {
+      color: var(--gold);
+      border-color: var(--gold);
+    }
+    .vehicle-card-cta {
+      background: var(--gold);
+      color: var(--black);
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      padding: 12px 20px;
+      border-radius: 4px;
+      text-align: center;
+      transition: background .2s;
+      display: block;
+    }
+    .vehicle-card-cta:hover { background: var(--gold-light); }
+
+    /* ── PRICING ── */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3px;
+      margin-top: 56px;
+    }
+    .price-card {
+      background: var(--card);
+      padding: 36px 32px;
+      border-top: 2px solid var(--border);
+      transition: border-color .25s;
+    }
+    .price-card:hover { border-color: var(--gold); }
+    .price-card-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+    .price-range {
+      font-family: var(--font-display);
+      font-size: 36px;
+      font-weight: 800;
+      letter-spacing: -.02em;
+      color: var(--white);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .price-per { font-size: 13px; color: var(--muted); margin-bottom: 20px; }
+    .price-card-divider { height: 1px; background: var(--border); margin-bottom: 20px; }
+    .price-card p { font-size: 14px; color: #888; line-height: 1.65; }
+
+    .includes-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 3px;
+      margin-top: 3px;
+    }
+    .includes-item {
+      background: #131313;
+      padding: 22px 28px;
+      display: flex; align-items: center; gap: 12px;
+      font-size: 14px; font-weight: 500;
+      color: var(--white);
+    }
+    .includes-item::before {
+      content: '✓';
+      color: var(--gold);
+      font-weight: 700;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    /* ── FAQ ── */
+    .faq-list { margin-top: 48px; display: flex; flex-direction: column; gap: 2px; }
+    .faq-item {
+      background: var(--card);
+      border-left: 3px solid transparent;
+      transition: border-color .2s;
+    }
+    .faq-item:hover { border-color: var(--gold); }
+    .faq-q {
+      padding: 22px 28px;
+      font-weight: 600;
+      font-size: 15px;
+      color: var(--white);
+      cursor: pointer;
+      display: flex; justify-content: space-between; align-items: center;
+      user-select: none;
+    }
+    .faq-q::after {
+      content: '+';
+      font-size: 22px;
+      font-weight: 300;
+      color: var(--gold);
+      flex-shrink: 0;
+      margin-left: 16px;
+      transition: transform .2s;
+    }
+    .faq-item.open .faq-q::after { transform: rotate(45deg); }
+    .faq-a {
+      display: none;
+      padding: 0 28px 22px;
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+    .faq-item.open .faq-a { display: block; }
+
+    /* ── FINAL CTA ── */
+    .final-cta {
+      position: relative;
+      padding: 100px 5%;
+      text-align: center;
+      overflow: hidden;
+    }
+    .final-cta-bg {
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(180deg, var(--black) 0%, rgba(10,10,10,0.85) 50%, var(--black) 100%),
+        url('https://static.wixstatic.com/media/53fd1a_fbd68e5035f546478d69001d5767f37f~mv2.jpg/v1/fill/w_1400,h_600,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/53fd1a_fbd68e5035f546478d69001d5767f37f~mv2.jpg') center/cover no-repeat;
+    }
+    .final-cta-inner { position: relative; z-index: 2; max-width: 700px; margin: 0 auto; }
+    .final-cta h2 {
+      font-family: var(--font-display);
+      font-size: clamp(38px, 5.5vw, 68px);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: -.02em;
+      line-height: .95;
+      margin-bottom: 20px;
+    }
+    .final-cta h2 em { font-style: normal; color: var(--gold); }
+    .final-cta p {
+      font-size: 17px;
+      color: #aaa;
+      max-width: 480px;
+      margin: 0 auto 40px;
+    }
+    .final-cta-btns {
+      display: flex; justify-content: center; flex-wrap: wrap; gap: 14px; margin-bottom: 24px;
+    }
+    .btn-outline {
+      color: var(--gold);
+      border: 1px solid var(--gold);
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 15px;
+      padding: 15px 30px;
+      border-radius: 4px;
+      transition: background .2s, color .2s;
+      display: inline-block;
+    }
+    .btn-outline:hover { background: var(--gold); color: var(--black); }
+    .final-note {
+      font-size: 12px; color: #555;
+      display: flex; justify-content: center; align-items: center; gap: 10px; flex-wrap: wrap;
+    }
+    .final-note span { color: #3a3a3a; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #000000;
+      border-top: 1px solid var(--border);
+      padding: 40px 5%;
+      text-align: center;
+    }
+    footer .footer-logos {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      margin-bottom: 20px;
+    }
+    footer .logo-text {
+      font-family: var(--font-display);
+      font-size: 32px;
+      font-weight: 800;
+      font-style: italic;
+      color: var(--white);
+      letter-spacing: -.02em;
+      display: flex;
+      align-items: center;
+    }
+    footer .logo-text span { color: var(--gold); margin-left: 2px; }
+    footer .footer-tagline {
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: var(--white);
+      margin-bottom: 18px;
+      line-height: 1.5;
+    }
+    footer .footer-cta {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--black);
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      padding: 12px 32px;
+      border-radius: 4px;
+      transition: background .2s;
+      margin-bottom: 32px;
+    }
+    footer .footer-cta:hover { background: var(--gold-light); }
+    footer .footer-info {
+      font-size: 12px;
+      color: #666;
+      line-height: 1.6;
+    }
+    footer .footer-info a { color: var(--gold); transition: color .2s; }
+    footer .footer-info a:hover { color: var(--gold-light); }
+
+    /* ── CTA BAR (mid-page) ── */
+    .cta-bar {
+      background: var(--gold);
+      padding: 20px 5%;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 16px;
+    }
+    .cta-bar p {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--black);
+      text-transform: uppercase;
+      letter-spacing: -.01em;
+    }
+    .cta-bar a {
+      background: var(--black);
+      color: var(--gold);
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: .06em;
+      padding: 12px 28px;
+      border-radius: 3px;
+      transition: background .2s;
+    }
+    .cta-bar a:hover { background: #1a1a1a; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav .nav-links { display: none; }
+      .prob-sol-grid { grid-template-columns: 1fr; }
+      .sol-col { border-left: none; border-top: 3px solid var(--gold); }
+      .steps-grid { grid-template-columns: repeat(2, 1fr); }
+      .pricing-grid { grid-template-columns: 1fr; }
+      .vehicles-card-grid { grid-template-columns: repeat(2, 1fr); }
+      footer .footer-logos { flex-direction: column; gap: 16px; }
+      footer .footer-tagline { font-size: 11px; }
+    }
+    @media (max-width: 600px) {
+      .steps-grid { grid-template-columns: 1fr; }
+      .includes-grid { grid-template-columns: 1fr; }
+      .vehicles-card-grid { grid-template-columns: 1fr; }
+      .vehicle-card { height: 420px; }
+      .prob-col, .sol-col {padding: 28px 20px;}
+      .cta-bar {
+        text-align: center;
+        margin: 0 auto;
+      }
+    }
+
+    /* ── FADE-IN ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero_ga-eyebrow { animation: fadeUp .5s ease both; }
+    .hero_ga h1      { animation: fadeUp .55s .1s ease both; }
+    .hero_ga-sub     { animation: fadeUp .55s .2s ease both; }
+    .hero_ga-checks  { animation: fadeUp .55s .3s ease both; }
+    .hero_ga-ctas    { animation: fadeUp .55s .4s ease both; }
+    .hero_ga-note    { animation: fadeUp .55s .5s ease both; }
+
+  </style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav>
+  <div class="nav-left">
+    <a href="https://www.driveitaustin.com" class="logo-text">DriveIt<span>›</span></a>
+    <div class="nav-links">
+      <!-- <a href="https://www.driveitaustin.com">HOME</a>
+      <a href="https://www.driveitaustin.com/buyers-club">OPTIONS</a>
+      <a href="https://www.driveitaustin.com/rentals">VEHICLES</a>
+      <a href="https://www.driveitaustin.com/about-us">ABOUT US</a>
+      <a href="https://www.driveitaustin.com/contact-us">CONTACT US</a> -->
+    </div>
+  </div>
+  <a href="tel:+15122701945" class="nav-cta">BOOK NOW</a>
+</nav>
+
+
+<!-- ─── hero_ga ─── -->
+<section class="hero_ga">
+  <div class="hero_ga-bg"></div>
+  <div class="hero_ga-content">
+    <div class="hero_ga-eyebrow">Car Rentals in Austin, TX</div>
+    <h1>Need a Car<br/>in Austin —<br/><em>Today?</em></h1>
+    <p class="hero_ga-sub">Fast, affordable car rentals — without the usual hassle. Get on the road in hours, not days. No dealerships. No long approvals.</p>
+    <div class="hero_ga-checks">
+      <span>Weekly &amp; monthly rentals</span>
+      <span>Debit cards accepted</span>
+      <span>Ideal for work, rideshare &amp; everyday driving</span>
+    </div>
+    <div class="hero_ga-ctas">
+      <a href="tel:+15122701945" class="btn-primary">👉 Talk to Us &amp; Drive IT</a>
+      <a href="tel:+15122701945" class="btn-ghost">📞 Call now — real person, fast response</a>
+    </div>
+    <p class="hero_ga-note">No obligation <span>•</span> Fast response <span>•</span> Same-day pickup possible</p>
+  </div>
+</section>
+
+
+<!-- ─── TRUST STRIP ─── -->
+<div class="trust">
+  <div class="trust-inner">
+    <span class="trust-label">Trusted by Austin drivers</span>
+    <span class="trust-item">No long-term contracts</span>
+    <span class="trust-item">Transparent pricing</span>
+    <span class="trust-item">Economy &amp; work-ready vehicles</span>
+    <span class="trust-item">Local Austin pickup or delivery</span>
+  </div>
+</div>
+
+
+<!-- ─── PROBLEM / SOLUTION ─── -->
+<section class="section prob-sol">
+  <div class="section-inner">
+    <div class="section-tag">Why Drive It?</div>
+    <h2 class="section-title">Built for<br/>Real Life</h2>
+    <div class="gold-line"></div>
+    <p class="section-body">Traditional rental companies make things complicated. Drive It is a simpler, faster, more flexible alternative.</p>
+
+    <div class="prob-sol-grid">
+      <div class="prob-col">
+        <div class="col-label">Traditional Rentals</div>
+        <div class="col-title">Makes Things<br/>Complicated</div>
+        <ul class="col-list">
+          <li>Long approval processes</li>
+          <li>Rigid requirements</li>
+          <li>Limited flexibility for real-life situations</li>
+          <li>Hidden fees and surprises</li>
+          <li>Dealership stress</li>
+        </ul>
+      </div>
+      <div class="sol-col">
+        <div class="col-label">Drive It Austin</div>
+        <div class="col-title">Drive It Is a<br/>Good Fit If You</div>
+        <ul class="col-list">
+          <li>Need a car quickly</li>
+          <li>Want clear pricing without surprises</li>
+          <li>Prefer flexible payment options</li>
+          <li>Need a vehicle for work, rideshare, or daily life</li>
+          <li>No unnecessary steps. No dealership stress.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ─── CTA BAR ─── -->
+<div class="cta-bar">
+  <p>Same-day pickup available — call us now</p>
+  <a href="tel:+15122701945">👉 Talk to Us &amp; Drive IT</a>
+</div>
+
+
+<!-- ─── HOW IT WORKS ─── -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-tag">The Process</div>
+    <h2 class="section-title">Renting With<br/>Drive It Is Simple</h2>
+    <div class="gold-line"></div>
+
+    <div class="steps-grid">
+      <div class="step">
+        <span class="step-num">01</span>
+        <div class="step-title">Tell Us What You Need</div>
+        <p>Let us know what type of vehicle you're looking for and how long you need it.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">02</span>
+        <div class="step-title">Get a Fast Response</div>
+        <p>We confirm availability and walk you through the next steps — no waiting around.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">03</span>
+        <div class="step-title">Pick Up or Get Delivery</div>
+        <p>Same-day pickup in Austin, or optional delivery to the airport or your location.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">04</span>
+        <div class="step-title">Drive &amp; Stay Flexible</div>
+        <p>Need more time? Weekly and monthly extensions are available when possible.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+<!-- ─── VEHICLES (CARD STYLE) ─── -->
+<section class="section vehicles" style="background: var(--black);">
+  <div class="section-inner">
+    <div class="section-tag">Our Fleet</div>
+    <h2 class="section-title">Choose What<br/>Fits Your Life</h2>
+    <div class="gold-line"></div>
+    <p class="section-body">From affordable daily drivers to work vehicles and SUVs, we keep a broad selection ready. Vehicle availability updates in real time.</p>
+
+    <div class="vehicles-card-grid">
+      <!-- Economy & Daily Drivers -->
+      <div class="vehicle-card">
+        <div class="vehicle-card-price-badge">
+          <div class="vehicle-card-price-badge-label">From</div>
+          <div class="vehicle-card-price-badge-amount">$40</div>
+          <div class="vehicle-card-price-badge-per">per day</div>
+        </div>
+        <div class="vehicle-card-bg" style="background-image: url('https://static.wixstatic.com/media/53fd1a_fdecdaea0bdc459fa1048acce8313fc4~mv2.png/v1/fill/w_272,h_270,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/53fd1a_fdecdaea0bdc459fa1048acce8313fc4~mv2.png');"></div>
+        <div class="vehicle-card-overlay"></div>
+        <div class="vehicle-card-content">
+          <div class="vehicle-card-spacer"></div>
+          <div class="vehicle-card-info">
+            <div class="vehicle-card-label">Category 01</div>
+            <h3 class="vehicle-card-title">Economy & Daily Drivers</h3>
+            <p class="vehicle-card-desc">Select/Book:</p>
+            <div class="vehicle-card-models">
+              <a href="https://drive-it-auto-group.booqableshop.com/products/nissan-versa">Nissan Versa</a>
+              <a href="https://drive-it-auto-group.booqableshop.com/products/nissan-sentra">Nissan Sentra</a>
+              <a href="https://drive-it-auto-group.booqableshop.com/products/toyota-corolla">Toyota Corolla</a>
+              <a href="https://drive-it-auto-group.booqableshop.com/products/hyundai-sonata">Hyundai Sonata</a>
+              <a href="https://drive-it-auto-group.booqableshop.com/products/chevy-cruze">Chevy Cruze</a>
+              <a href="https://drive-it-auto-group.booqableshop.com/products/mitsubishi-mirage">Mitsubishi Mirage</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SUVs & Family Vehicles -->
+      <div class="vehicle-card">
+        <div class="vehicle-card-price-badge">
+          <div class="vehicle-card-price-badge-label">From</div>
+          <div class="vehicle-card-price-badge-amount">$65</div>
+          <div class="vehicle-card-price-badge-per">per day</div>
+        </div>
+        <div class="vehicle-card-bg" style="background-image: url('https://static.wixstatic.com/media/53fd1a_221a9916b5624fefbd4cd74fd7aed13e~mv2.png/v1/fill/w_272,h_270,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/53fd1a_221a9916b5624fefbd4cd74fd7aed13e~mv2.png');"></div>
+        <div class="vehicle-card-overlay"></div>
+        <div class="vehicle-card-content">
+          <div class="vehicle-card-spacer"></div>
+          <div class="vehicle-card-info">
+            <div class="vehicle-card-label">Category 02</div>
+            <h3 class="vehicle-card-title">SUVs & Family Vehicles</h3>
+            <p class="vehicle-card-desc">Select/Book:</p>
+            <div class="vehicle-card-models">
+              <a href="https://drive-it-auto-group.booqableshop.com/products/honda-pilot">Honda Pilot</a>
+              <a href="https://drive-it-auto-group.booqableshop.com/products/mazda-cx-9">Mazda CX-9</a>
+              <a href="https://drive-it-auto-group.booqableshop.com/products/audi-q7">Audi Q7</a>
+              <a href="https://drive-it-auto-group.booqableshop.com/products/porsche-macan">Porsche Macan</a>
+              <a href="https://drive-it-auto-group.booqableshop.com/products/tesla-model-y">Tesla Model Y</a>
+              <a href="https://drive-it-auto-group.booqableshop.com/products/tesla-model-x">Tesla Model X</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Trucks & Work Vehicles -->
+      <div class="vehicle-card">
+        <div class="vehicle-card-price-badge">
+          <div class="vehicle-card-price-badge-label">From</div>
+          <div class="vehicle-card-price-badge-amount">$50</div>
+          <div class="vehicle-card-price-badge-per">per day</div>
+        </div>
+        <div class="vehicle-card-bg" style="background-image: url('https://static.wixstatic.com/media/53fd1a_d5d712afa5ec4f86acc6ff256531c8b7~mv2.png/v1/fill/w_272,h_270,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/53fd1a_d5d712afa5ec4f86acc6ff256531c8b7~mv2.png');"></div>
+        <div class="vehicle-card-overlay"></div>
+        <div class="vehicle-card-content">
+          <div class="vehicle-card-spacer"></div>
+          <div class="vehicle-card-info">
+            <div class="vehicle-card-label">Category 03</div>
+            <h3 class="vehicle-card-title">Trucks & Work Vehicles</h3>
+            <p class="vehicle-card-desc">Select/Book:</p>
+            <div class="vehicle-card-models">
+              <a href="https://drive-it-auto-group.booqableshop.com/products/ford-f-150">Ford F-150</a>
+              <a href="https://drive-it-auto-group.booqableshop.com/products/ram-1500-utility-truck">RAM 1500</a>
+              <a href="https://drive-it-auto-group.booqableshop.com/products/mercedes-sprinter">Mercedes Sprinter</a>
+              <a href="https://drive-it-auto-group.booqableshop.com/products/nissan-cargo-van">Nissan Cargo Van</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Electric Vehicles -->
+      <div class="vehicle-card">
+        <div class="vehicle-card-price-badge">
+          <div class="vehicle-card-price-badge-label">From</div>
+          <div class="vehicle-card-price-badge-amount">$55</div>
+          <div class="vehicle-card-price-badge-per">per day</div>
+        </div>
+        <div class="vehicle-card-bg" style="background-image: url('https://static.wixstatic.com/media/53fd1a_a07c4d06094848e59cc4387c4e9dbb72~mv2.png/v1/fill/w_272,h_270,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/53fd1a_a07c4d06094848e59cc4387c4e9dbb72~mv2.png');"></div>
+        <div class="vehicle-card-overlay"></div>
+        <div class="vehicle-card-content">
+          <div class="vehicle-card-spacer"></div>
+          <div class="vehicle-card-info">
+            <div class="vehicle-card-label">Category 04</div>
+            <h3 class="vehicle-card-title">Electric Vehicles</h3>
+            <p class="vehicle-card-desc">Select/Book:</p>
+            <div class="vehicle-card-models">
+              <a href="https://drive-it-auto-group.booqableshop.com/products/tesla-model-3-base">Tesla M3 Standard</a>
+                          <a href="https://drive-it-auto-group.booqableshop.com/products/tesla-model-y">Tesla Model Y</a>
+              <a href="https://drive-it-auto-group.booqableshop.com/products/tesla-model-3-performance">Tesla M3 Long Range</a>
+              <a href="https://drive-it-auto-group.booqableshop.com/products/tesla-model-3-premium">Tesla M3 Performance</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Single Book Now Button Below Cards -->
+    <div style="text-align: center; margin-top: 32px;">
+      <a href="https://drive-it-auto-group.booqableshop.com/" class="btn-primary" style="font-size:15px; padding:16px 40px;">BOOK NOW</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ─── PRICING ─── -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-tag">Pricing</div>
+    <h2 class="section-title">Simple,<br/>Transparent Pricing</h2>
+    <div class="gold-line"></div>
+    <p class="section-body">No dealership games. No hidden surprises. Weekly and monthly discounts applied automatically.</p>
+
+    <div class="pricing-grid">
+      <div class="price-card">
+        <div class="price-card-label">Economy Cars</div>
+        <div class="price-range">$40–$55</div>
+        <div class="price-per">per day</div>
+        <div class="price-card-divider"></div>
+        <p>Reliable daily drivers for commuting, errands, and rideshare work.</p>
+      </div>
+      <div class="price-card">
+        <div class="price-card-label">SUVs &amp; Premium</div>
+        <div class="price-range">$65–$95</div>
+        <div class="price-per">per day</div>
+        <div class="price-card-divider"></div>
+        <p>More space and elevated comfort — Porsche, Audi, Tesla, Honda and more.</p>
+      </div>
+      <div class="price-card">
+        <div class="price-card-label">Trucks &amp; Vans</div>
+        <div class="price-range">$50–$85</div>
+        <div class="price-per">per day</div>
+        <div class="price-card-divider"></div>
+        <p>Work-ready trucks and vans — F-150, RAM 1500, Sprinter, and cargo vans.</p>
+      </div>
+    </div>
+
+    <div class="includes-grid">
+      <div class="includes-item">Flexible payment options</div>
+      <div class="includes-item">Debit cards accepted</div>
+      <div class="includes-item">Fast booking and pickup</div>
+      <div class="includes-item">No long-term commitment required</div>
+      <div class="includes-item">Automatic discounts for longer rentals</div>
+      <div class="includes-item">No return required to extend your rental</div>
+    </div>
+
+    <p style="font-size:12px; color:#555; margin-top:16px;">Prices vary by vehicle and availability. Taxes and optional extras may apply.</p>
+  </div>
+</section>
+
+
+<!-- ─── CTA BAR ─── -->
+<div class="cta-bar">
+  <p>Ready to get moving? We'll set you up today.</p>
+  <a href="tel:+15122701945">👉 Talk to Us &amp; Drive IT</a>
+</div>
+
+
+<!-- ─── FAQ ─── -->
+<section class="section" style="background: var(--dark);">
+  <div class="section-inner">
+    <div class="section-tag">Common Questions</div>
+    <h2 class="section-title">FAQ</h2>
+    <div class="gold-line"></div>
+
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q">Do I need perfect credit to rent?</div>
+        <div class="faq-a">No. Our process is designed to be more flexible than traditional rental or dealership options. We work with drivers across different credit situations.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Can I use a debit card or CashApp?</div>
+        <div class="faq-a">Yes. Visa and Mastercard debit cards are accepted. CashApp works if linked to a Visa card with sufficient balance.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Can I use the car for work or rideshare (Uber/Lyft)?</div>
+        <div class="faq-a">Yes. Many of our vehicles are suitable for Uber, Lyft, and other work-related use. Just let us know when you reach out and we'll match you to the right vehicle.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">How fast can I get a car?</div>
+        <div class="faq-a">Most customers are able to book and pick up the same day. Get in touch and we'll confirm availability and walk you through the next steps immediately.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">I'm not comfortable with apps — can someone help me?</div>
+        <div class="faq-a">Absolutely. Our team can guide you step by step over the phone. Just call us and a real person will help you get set up quickly.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ─── FINAL CTA ─── -->
+<!-- <section class="final-cta">
+  <div class="final-cta-bg"></div>
+  <div class="final-cta-inner">
+    <h2>Drive IT Today —<br/><em>Without the Stress</em></h2>
+    <p>Tell us what you need and we'll help you find the fastest option. Real people, real help.</p>
+    <div class="final-cta-btns">
+      <a href="tel:+15122701945" class="btn-primary" style="font-size:16px; padding:18px 40px;">👉 Talk to Us &amp; Drive IT</a>
+      <a href="tel:+15122701945" class="btn-outline">📞 Call (512) 270-1945</a>
+    </div>
+    <div class="final-note">
+      Fast response <span>•</span> No obligation <span>•</span> Real people, real help
+    </div>
+  </div>
+</section> -->
+
+
+<!-- ─── FOOTER ─── -->
+<!-- <footer>
+  <div class="footer-logos">
+    <div class="logo-text">DriveIt<span>›</span></div>
+    <div class="footer-tagline">
+      AUSTIN DO YOU NEED A CAR TODAY? NO CREDIT CHECKS<br/>
+      • NO CARD HOLDS • CALL NOW
+    </div>
+    <div class="logo-text">DriveIt<span>›</span></div>
+  </div>
+  
+  <a href="tel:+15122701945" class="footer-cta">BOOK NOW</a>
+  
+  <div class="footer-info">
+    14425 Falcon Head Blvd, Building E, Suite 100, Austin, TX 78738<br/>
+    <a href="tel:+15122701945">(512) 270-1945</a> &nbsp;·&nbsp;
+    <a href="/cdn-cgi/l/email-protection#c48daaa2ab84a0b6adb2a1adb0a6b1bdb7a1a8a8b6a1aab0eaa7aba9"><span class="__cf_email__" data-cfemail="50193e363f103422392635392432252923353c3c22353e247e333f3d">[email&#160;protected]</span></a><br/>
+    <br/>
+    © 2025 Drive It Austin. All rights reserved. Prices and vehicle availability subject to change.
+  </div>
+</footer> -->
+
+
+
+
+<script>
+  // FAQ accordion
+  document.querySelectorAll('.faq-q').forEach(q => {
+    q.addEventListener('click', () => {
+      const item = q.parentElement;
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+</script>
+
+</body>
+</html>
