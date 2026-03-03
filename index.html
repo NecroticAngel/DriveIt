@@ -92,7 +92,7 @@
       position: absolute; inset: 0;
       background:
         linear-gradient(135deg, rgba(10,10,10,0.97) 0%, rgba(10,10,10,0.80) 60%, rgba(10,10,10,0.60) 100%),
-        url('https://static.wixstatic.com/media/53fd1a_2d416c66363049e3887f6e924db07b6d~mv2.jpg/v1/fill/w_1400,h_800,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/53fd1a_2d416c66363049e3887f6e924db07b6d~mv2.jpg') center/cover no-repeat;
+        url('./images/nissan_versa_header.jpg') center/cover no-repeat;
     }
     .hero_ga-bg::after {
       content: '';
@@ -465,7 +465,7 @@
       gap: 6px;
       margin-bottom: 16px;
     }
-    .vehicle-card-models a {
+    .vehicle-card-models .vehicle-card-model {
       font-size: 10px;
       font-weight: 500;
       color: #999;
@@ -473,10 +473,10 @@
       border: 1px solid rgba(255,255,255,0.15);
       border-radius: 2px;
       white-space: nowrap;
-      cursor: pointer;
+      cursor: default;
       transition: all .2s;
     }
-    .vehicle-card-models a:hover {
+    .vehicle-card-models .vehicle-card-model:hover {
       color: var(--gold);
       border-color: var(--gold);
     }
@@ -913,14 +913,13 @@
           <div class="vehicle-card-info">
             <div class="vehicle-card-label">Category 01</div>
             <h3 class="vehicle-card-title">Economy & Daily Drivers</h3>
-            <p class="vehicle-card-desc">Select/Book:</p>
             <div class="vehicle-card-models">
-              <a href="https://drive-it-auto-group.booqableshop.com/products/nissan-versa">Nissan Versa</a>
-              <a href="https://drive-it-auto-group.booqableshop.com/products/nissan-sentra">Nissan Sentra</a>
-              <a href="https://drive-it-auto-group.booqableshop.com/products/toyota-corolla">Toyota Corolla</a>
-              <a href="https://drive-it-auto-group.booqableshop.com/products/hyundai-sonata">Hyundai Sonata</a>
-              <a href="https://drive-it-auto-group.booqableshop.com/products/chevy-cruze">Chevy Cruze</a>
-              <a href="https://drive-it-auto-group.booqableshop.com/products/mitsubishi-mirage">Mitsubishi Mirage</a>
+              <span class="vehicle-card-model">Nissan Versa</span>
+              <span class="vehicle-card-model">Nissan Sentra</span>
+              <span class="vehicle-card-model">Toyota Corolla</span>
+              <span class="vehicle-card-model">Hyundai Sonata</span>
+              <span class="vehicle-card-model">Chevy Cruze</span>
+              <span class="vehicle-card-model">Mitsubishi Mirage</span>
             </div>
           </div>
         </div>
@@ -940,14 +939,13 @@
           <div class="vehicle-card-info">
             <div class="vehicle-card-label">Category 02</div>
             <h3 class="vehicle-card-title">SUVs & Family Vehicles</h3>
-            <p class="vehicle-card-desc">Select/Book:</p>
             <div class="vehicle-card-models">
-              <a href="https://drive-it-auto-group.booqableshop.com/products/honda-pilot">Honda Pilot</a>
-              <a href="https://drive-it-auto-group.booqableshop.com/products/mazda-cx-9">Mazda CX-9</a>
-              <a href="https://drive-it-auto-group.booqableshop.com/products/audi-q7">Audi Q7</a>
-              <a href="https://drive-it-auto-group.booqableshop.com/products/porsche-macan">Porsche Macan</a>
-              <a href="https://drive-it-auto-group.booqableshop.com/products/tesla-model-y">Tesla Model Y</a>
-              <a href="https://drive-it-auto-group.booqableshop.com/products/tesla-model-x">Tesla Model X</a>
+              <span class="vehicle-card-model">Honda Pilot</span>
+              <span class="vehicle-card-model">Mazda CX-9</span>
+              <span class="vehicle-card-model">Audi Q7</span>
+              <span class="vehicle-card-model">Porsche Macan</span>
+              <span class="vehicle-card-model">Tesla Model Y</span>
+              <span class="vehicle-card-model">Tesla Model X</span>
             </div>
           </div>
         </div>
@@ -967,12 +965,11 @@
           <div class="vehicle-card-info">
             <div class="vehicle-card-label">Category 03</div>
             <h3 class="vehicle-card-title">Trucks & Work Vehicles</h3>
-            <p class="vehicle-card-desc">Select/Book:</p>
             <div class="vehicle-card-models">
-              <a href="https://drive-it-auto-group.booqableshop.com/products/ford-f-150">Ford F-150</a>
-              <a href="https://drive-it-auto-group.booqableshop.com/products/ram-1500-utility-truck">RAM 1500</a>
-              <a href="https://drive-it-auto-group.booqableshop.com/products/mercedes-sprinter">Mercedes Sprinter</a>
-              <a href="https://drive-it-auto-group.booqableshop.com/products/nissan-cargo-van">Nissan Cargo Van</a>
+              <span class="vehicle-card-model">Ford F-150</span>
+              <span class="vehicle-card-model">RAM 1500</span>
+              <span class="vehicle-card-model">Mercedes Sprinter</span>
+              <span class="vehicle-card-model">Nissan Cargo Van</span>
             </div>
           </div>
         </div>
@@ -992,12 +989,11 @@
           <div class="vehicle-card-info">
             <div class="vehicle-card-label">Category 04</div>
             <h3 class="vehicle-card-title">Electric Vehicles</h3>
-            <p class="vehicle-card-desc">Select/Book:</p>
             <div class="vehicle-card-models">
-              <a href="https://drive-it-auto-group.booqableshop.com/products/tesla-model-3-base">Tesla M3 Standard</a>
-                          <a href="https://drive-it-auto-group.booqableshop.com/products/tesla-model-y">Tesla Model Y</a>
-              <a href="https://drive-it-auto-group.booqableshop.com/products/tesla-model-3-performance">Tesla M3 Long Range</a>
-              <a href="https://drive-it-auto-group.booqableshop.com/products/tesla-model-3-premium">Tesla M3 Performance</a>
+              <span class="vehicle-card-model">Tesla M3 Standard</span>
+              <span class="vehicle-card-model">Tesla Model Y</span>
+              <span class="vehicle-card-model">Tesla M3 Long Range</span>
+              <span class="vehicle-card-model">Tesla M3 Performance</span>
             </div>
           </div>
         </div>
@@ -1006,7 +1002,7 @@
 
     <!-- Single Book Now Button Below Cards -->
     <div style="text-align: center; margin-top: 32px;">
-      <a href="https://drive-it-auto-group.booqableshop.com/" class="btn-primary" style="font-size:15px; padding:16px 40px;">BOOK NOW</a>
+      <a href="#booking_form" class="btn-primary" style="font-size:15px; padding:16px 40px;">BOOK NOW</a>
     </div>
   </div>
 </section>
@@ -1056,7 +1052,6 @@
     <p style="font-size:12px; color:#555; margin-top:16px;">Prices vary by vehicle and availability. Taxes and optional extras may apply.</p>
   </div>
 </section>
-
 
 
 
