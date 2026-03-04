@@ -1197,10 +1197,24 @@
   document.querySelectorAll('a[data-scroll-to="bottom"]').forEach(a => {
     a.addEventListener('click', function(e) {
       e.preventDefault();
-      window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'smooth' });
+      var bottomEl = document.getElementById('page-bottom');
+      if (bottomEl) {
+        bottomEl.scrollIntoView({ behavior: 'smooth', block: 'end' });
+      } else {
+        var el = document.scrollingElement || document.documentElement;
+        var maxScroll = Math.max(
+          document.body.scrollHeight,
+          document.body.offsetHeight,
+          document.documentElement.scrollHeight,
+          document.documentElement.offsetHeight
+        );
+        el.scrollTo({ top: maxScroll, behavior: 'smooth' });
+      }
     });
   });
 </script>
+
+<div id="page-bottom" aria-hidden="true" style="height:0;overflow:hidden;"></div>
 
 </body>
 </html>
