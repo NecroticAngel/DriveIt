@@ -1236,23 +1236,18 @@
         })(hashLinks[k]);
       }
 
-      // Scroll to absolute bottom (works in iframe; tries parent first, then self)
+      // Scroll to absolute bottom (if inside Wix iframe, try scrolling parent page)
       var bottomLinks = document.querySelectorAll('a[data-scroll-to="bottom"]');
       for (var m = 0; m < bottomLinks.length; m++) {
         bottomLinks[m].addEventListener('click', function (e) {
           e.preventDefault();
-          // 1) If we're inside an iframe, try to scroll the parent page
+          // 1) If we're inside an iframe, try to scroll the parent page.
+          // We only call parent.scrollTo (no access to parent.document) so this
+          // is allowed even when the iframe is cross-origin, which is the case on Wix.
           try {
             if (window.parent && window.parent !== window) {
-              var parentDoc = window.parent.document;
-              var parentMax = Math.max(
-                parentDoc.body.scrollHeight,
-                parentDoc.body.offsetHeight,
-                parentDoc.documentElement.scrollHeight,
-                parentDoc.documentElement.offsetHeight
-              );
               window.parent.scrollTo({
-                top: parentMax + 100,
+                top: 999999, // effectively "bottom plus some extra"
                 behavior: 'smooth'
               });
               return;
