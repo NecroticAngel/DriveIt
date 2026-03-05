@@ -766,16 +766,16 @@
 <!-- ─── NAV ─── -->
 <nav>
   <div class="nav-left">
-    <a href="#" data-scroll-to="bottom" class="logo-text">DriveIt<span>›</span></a>
+    <a href="#page-bottom" class="logo-text">DriveIt<span>›</span></a>
     <div class="nav-links">
-      <!-- <a href="#" data-scroll-to="bottom">HOME</a>
-      <a href="#" data-scroll-to="bottom">OPTIONS</a>
-      <a href="#" data-scroll-to="bottom">VEHICLES</a>
-      <a href="#" data-scroll-to="bottom">ABOUT US</a>
-      <a href="#" data-scroll-to="bottom">CONTACT US</a> -->
+      <!-- <a href="#page-bottom">HOME</a>
+      <a href="#page-bottom">OPTIONS</a>
+      <a href="#page-bottom">VEHICLES</a>
+      <a href="#page-bottom">ABOUT US</a>
+      <a href="#page-bottom">CONTACT US</a> -->
     </div>
   </div>
-  <a href="#" data-scroll-to="bottom" class="nav-cta">BOOK NOW</a>
+  <a href="#page-bottom" class="nav-cta">BOOK NOW</a>
 </nav>
 
 
@@ -792,8 +792,8 @@
       <span>Ideal for work, rideshare &amp; everyday driving</span>
     </div>
     <div class="hero_ga-ctas">
-      <a href="#" data-scroll-to="bottom" class="btn-primary">👉 Talk to Us &amp; DriveIt</a>
-      <a href="#" data-scroll-to="bottom" class="btn-ghost">📞 Call now — real person, fast response</a>
+      <a href="#page-bottom" class="btn-primary">👉 Talk to Us &amp; DriveIt</a>
+      <a href="#page-bottom" class="btn-ghost">📞 Call now — real person, fast response</a>
     </div>
     <p class="hero_ga-note">No obligation <span>•</span> Fast response <span>•</span> Same-day pickup possible</p>
   </div>
@@ -851,7 +851,7 @@
 <!-- ─── CTA BAR ─── -->
 <div class="cta-bar">
   <p>Same-day pickup available — call us now</p>
-  <a href="#" data-scroll-to="bottom">👉 Talk to Us &amp; DriveIt</a>
+  <a href="#page-bottom">👉 Talk to Us &amp; DriveIt</a>
 </div>
 
 
@@ -1002,7 +1002,7 @@
 
     <!-- Single Book Now Button Below Cards -->
     <div style="text-align: center; margin-top: 32px;">
-      <a href="#" data-scroll-to="bottom" class="btn-primary" style="font-size:15px; padding:16px 40px;">BOOK NOW</a>
+      <a href="#page-bottom" class="btn-primary" style="font-size:15px; padding:16px 40px;">BOOK NOW</a>
     </div>
   </div>
 </section>
@@ -1103,12 +1103,12 @@
 <!-- ─── CTA BAR ─── -->
 <div class="cta-bar">
   <p>Ready to get moving? We'll set you up today.</p>
-  <a href="#" data-scroll-to="bottom">👉 Talk to Us &amp; DriveIt</a>
+  <a href="#page-bottom">👉 Talk to Us &amp; DriveIt</a>
 </div>
 
 
 <!-- ─── FAQ ─── -->
-<section class="section" style="background: var(--dark);" id="booking_form">
+<section class="section" style="background: var(--dark);" id="faq">
   <div class="section-inner">
     <div class="section-tag">Common Questions</div>
     <h2 class="section-title">FAQ</h2>
@@ -1147,8 +1147,8 @@
     <h2>DriveIt Today —<br/><em>Without the Stress</em></h2>
     <p>Tell us what you need and we'll help you find the fastest option. Real people, real help.</p>
     <div class="final-cta-btns">
-      <a href="#" data-scroll-to="bottom" class="btn-primary" style="font-size:16px; padding:18px 40px;">👉 Talk to Us &amp; DriveIt</a>
-      <a href="#" data-scroll-to="bottom" class="btn-outline">📞 Call (512) 270-1945</a>
+      <a href="#page-bottom" class="btn-primary" style="font-size:16px; padding:18px 40px;">👉 Talk to Us &amp; DriveIt</a>
+      <a href="#page-bottom" class="btn-outline">📞 Call (512) 270-1945</a>
     </div>
     <div class="final-note">
       Fast response <span>•</span> No obligation <span>•</span> Real people, real help
@@ -1168,12 +1168,12 @@
     <div class="logo-text">DriveIt<span>›</span></div>
   </div>
   
-  <a href="#" data-scroll-to="bottom" class="footer-cta">BOOK NOW</a>
+  <a href="#page-bottom" class="footer-cta">BOOK NOW</a>
   
   <div class="footer-info">
     14425 Falcon Head Blvd, Building E, Suite 100, Austin, TX 78738<br/>
-    <a href="#" data-scroll-to="bottom">(512) 270-1945</a> &nbsp;·&nbsp;
-    <a href="#" data-scroll-to="bottom"><span class="__cf_email__" data-cfemail="50193e363f103422392635392432252923353c3c22353e247e333f3d">[email&#160;protected]</span></a><br/>
+    <a href="#page-bottom">(512) 270-1945</a> &nbsp;·&nbsp;
+    <a href="#page-bottom"><span class="__cf_email__" data-cfemail="50193e363f103422392635392432252923353c3c22353e247e333f3d">[email&#160;protected]</span></a><br/>
     <br/>
     © 2025 DriveIt Austin. All rights reserved. Prices and vehicle availability subject to change.
   </div>
@@ -1183,103 +1183,24 @@
 
 
 <script>
+  // Simple FAQ accordion (no scroll magic)
   (function () {
-    // Run after DOM is ready (extra safety if this ever moves)
-    function onReady(fn) {
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', fn);
-      } else {
-        fn();
-      }
+    var faqQs = document.querySelectorAll('.faq-q');
+    for (var i = 0; i < faqQs.length; i++) {
+      faqQs[i].addEventListener('click', function () {
+        var item = this.parentElement;
+        var isOpen = item.classList.contains('open');
+        var all = document.querySelectorAll('.faq-item');
+        for (var j = 0; j < all.length; j++) {
+          all[j].classList.remove('open');
+        }
+        if (!isOpen) item.classList.add('open');
+      });
     }
-
-    onReady(function () {
-      // FAQ accordion
-      var faqQs = document.querySelectorAll('.faq-q');
-      for (var i = 0; i < faqQs.length; i++) {
-        faqQs[i].addEventListener('click', function () {
-          var item = this.parentElement;
-          var isOpen = item.classList.contains('open');
-          var all = document.querySelectorAll('.faq-item');
-          for (var j = 0; j < all.length; j++) {
-            all[j].classList.remove('open');
-          }
-          if (!isOpen) item.classList.add('open');
-        });
-      }
-
-      // Smooth scroll for in-page #anchor links with extra offset
-      // Example: <a href="#booking_form" data-offset="100">Link</a>
-      var hashLinks = document.querySelectorAll('a[href^="#"]');
-      for (var k = 0; k < hashLinks.length; k++) {
-        (function (a) {
-          var hash = a.getAttribute('href');
-          var id = hash && hash.length > 1 ? hash.slice(1) : null;
-          if (!id) return;
-
-          a.addEventListener('click', function (e) {
-            var target = document.getElementById(id);
-            if (!target) return;
-
-            e.preventDefault();
-
-            var extra = parseInt(a.getAttribute('data-offset') || '0', 10) || 0;
-            var rect = target.getBoundingClientRect();
-            var currentTop = window.pageYOffset || document.documentElement.scrollTop || 0;
-            var scrollTop = currentTop + rect.top + extra;
-
-            window.scrollTo({
-              top: scrollTop,
-              behavior: 'smooth'
-            });
-          });
-        })(hashLinks[k]);
-      }
-
-      // Scroll to absolute bottom (if inside Wix iframe, try scrolling parent page)
-      var bottomLinks = document.querySelectorAll('a[data-scroll-to="bottom"]');
-      for (var m = 0; m < bottomLinks.length; m++) {
-        bottomLinks[m].addEventListener('click', function (e) {
-          e.preventDefault();
-          // 1) If we're inside an iframe, try to scroll the parent page.
-          // We only call parent.scrollTo (no access to parent.document) so this
-          // is allowed even when the iframe is cross-origin, which is the case on Wix.
-          try {
-            if (window.parent && window.parent !== window) {
-              window.parent.scrollTo({
-                top: 999999, // effectively "bottom plus some extra"
-                behavior: 'smooth'
-              });
-              return;
-            }
-          } catch (err) {
-            // Cross-origin; fall back to scrolling inside the iframe
-          }
- 
-          // 2) Fallback: scroll inside this document
-          var bottomEl = document.getElementById('page-bottom');
-          if (bottomEl) {
-            // Scroll slightly past the bottom anchor for extra space
-            var rect = bottomEl.getBoundingClientRect();
-            var base = (window.pageYOffset || document.documentElement.scrollTop || 0) + rect.bottom;
-            window.scrollTo({ top: base + 100, behavior: 'smooth' });
-          } else {
-            var el = document.scrollingElement || document.documentElement;
-            var maxScroll = Math.max(
-              document.body.scrollHeight,
-              document.body.offsetHeight,
-              document.documentElement.scrollHeight,
-              document.documentElement.offsetHeight
-            );
-            el.scrollTo({ top: maxScroll + 100, behavior: 'smooth' });
-          }
-        });
-      }
-    });
   })();
 </script>
 
-<div id="page-bottom" aria-hidden="true" style="height:0;overflow:hidden;"></div>
+<div id="page-bottom" aria-hidden="true" style="height:0;overflow:hidden;margin-bottom:100px;"></div>
 
 </body>
 </html>
