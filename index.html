@@ -1183,62 +1183,84 @@
 
 
 <script>
-  // FAQ accordion
-  document.querySelectorAll('.faq-q').forEach(q => {
-    q.addEventListener('click', () => {
-      const item = q.parentElement;
-      const isOpen = item.classList.contains('open');
-      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
-      if (!isOpen) item.classList.add('open');
-    });
-  });
-
-  // Smooth scroll for in-page #anchor links with extra offset
-  // Example: <a href="#booking_form" data-offset="100">Link</a>
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
-    const hash = a.getAttribute('href');
-    const id = hash && hash.length > 1 ? hash.slice(1) : null;
-    if (!id) return;
-
-    a.addEventListener('click', function (e) {
-      const target = document.getElementById(id);
-      if (!target) return;
-
-      e.preventDefault();
-
-      var extra = parseInt(a.getAttribute('data-offset') || '0', 10) || 0;
-      var rect = target.getBoundingClientRect();
-      var scrollTop = (window.pageYOffset || document.documentElement.scrollTop || 0) + rect.top + extra;
-
-      window.scrollTo({
-        top: scrollTop,
-        behavior: 'smooth'
-      });
-    });
-  });
-
-  // Scroll to absolute bottom (works in iframe; no anchor needed)
-  document.querySelectorAll('a[data-scroll-to="bottom"]').forEach(a => {
-    a.addEventListener('click', function(e) {
-      e.preventDefault();
-      var bottomEl = document.getElementById('page-bottom');
-      if (bottomEl) {
-        // Scroll slightly past the bottom anchor for extra space
-        var rect = bottomEl.getBoundingClientRect();
-        var base = (window.pageYOffset || document.documentElement.scrollTop || 0) + rect.bottom;
-        window.scrollTo({ top: base + 100, behavior: 'smooth' });
+  (function () {
+    // Run after DOM is ready (extra safety if this ever moves)
+    function onReady(fn) {
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', fn);
       } else {
-        var el = document.scrollingElement || document.documentElement;
-        var maxScroll = Math.max(
-          document.body.scrollHeight,
-          document.body.offsetHeight,
-          document.documentElement.scrollHeight,
-          document.documentElement.offsetHeight
-        );
-        el.scrollTo({ top: maxScroll + 100, behavior: 'smooth' });
+        fn();
+      }
+    }
+
+    onReady(function () {
+      // FAQ accordion
+      var faqQs = document.querySelectorAll('.faq-q');
+      for (var i = 0; i < faqQs.length; i++) {
+        faqQs[i].addEventListener('click', function () {
+          var item = this.parentElement;
+          var isOpen = item.classList.contains('open');
+          var all = document.querySelectorAll('.faq-item');
+          for (var j = 0; j < all.length; j++) {
+            all[j].classList.remove('open');
+          }
+          if (!isOpen) item.classList.add('open');
+        });
+      }
+
+      // Smooth scroll for in-page #anchor links with extra offset
+      // Example: <a href="#booking_form" data-offset="100">Link</a>
+      var hashLinks = document.querySelectorAll('a[href^="#"]');
+      for (var k = 0; k < hashLinks.length; k++) {
+        (function (a) {
+          var hash = a.getAttribute('href');
+          var id = hash && hash.length > 1 ? hash.slice(1) : null;
+          if (!id) return;
+
+          a.addEventListener('click', function (e) {
+            var target = document.getElementById(id);
+            if (!target) return;
+
+            e.preventDefault();
+
+            var extra = parseInt(a.getAttribute('data-offset') || '0', 10) || 0;
+            var rect = target.getBoundingClientRect();
+            var currentTop = window.pageYOffset || document.documentElement.scrollTop || 0;
+            var scrollTop = currentTop + rect.top + extra;
+
+            window.scrollTo({
+              top: scrollTop,
+              behavior: 'smooth'
+            });
+          });
+        })(hashLinks[k]);
+      }
+
+      // Scroll to absolute bottom (works in iframe; no anchor needed)
+      var bottomLinks = document.querySelectorAll('a[data-scroll-to="bottom"]');
+      for (var m = 0; m < bottomLinks.length; m++) {
+        bottomLinks[m].addEventListener('click', function (e) {
+          e.preventDefault();
+          var bottomEl = document.getElementById('page-bottom');
+          if (bottomEl) {
+            // Scroll slightly past the bottom anchor for extra space
+            var rect = bottomEl.getBoundingClientRect();
+            var base = (window.pageYOffset || document.documentElement.scrollTop || 0) + rect.bottom;
+            window.scrollTo({ top: base + 100, behavior: 'smooth' });
+          } else {
+            var el = document.scrollingElement || document.documentElement;
+            var maxScroll = Math.max(
+              document.body.scrollHeight,
+              document.body.offsetHeight,
+              document.documentElement.scrollHeight,
+              document.documentElement.offsetHeight
+            );
+            el.scrollTo({ top: maxScroll + 100, behavior: 'smooth' });
+          }
+        });
       }
     });
-  });
+  })();
 </script>
 
 <div id="page-bottom" aria-hidden="true" style="height:0;overflow:hidden;"></div>
