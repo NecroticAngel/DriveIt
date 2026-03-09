@@ -1213,23 +1213,48 @@
 
 <div id="page-bottom" aria-hidden="true" style="height:0;overflow:hidden;margin-bottom:100px;"></div>
 <script>
+  // ─── Pass parent URL params into iframe (for Google call conversion) ───
+  // When this page is embedded in Wix, the parent has ?gclid=... but the iframe URL often does not.
+  // Google's "Calls from website" script only sees this document's URL. So we try to copy params from parent.
+  (function() {
+    try {
+      if (window.self !== window.top && !window.location.search) {
+        var parentSearch = window.top.location.search;
+        if (parentSearch && parentSearch.length > 1) {
+          var newUrl = window.location.pathname + parentSearch + (window.location.hash || '');
+          if (window.history && window.history.replaceState) {
+            window.history.replaceState(null, '', newUrl);
+          }
+        }
+      }
+    } catch (e) {
+      // Cross-origin: cannot read parent. Wix must pass query params into the iframe src.
+    }
+  })();
+</script>
+<script>
   window.addEventListener('load', function() {
     var attempts = 0;
+    var defaultHref = 'tel:+15122701945';
     function trySwap() {
       var phoneLink = document.getElementById('phone_number_header');
-      
-      // Force the href to be clean protocol-only
-      if (phoneLink) {
-          phoneLink.href = "tel:+15122701945";
+      if (!phoneLink) return;
+
+      // Set default href only once so we don't overwrite Google's forwarding number after they swap it
+      if (!phoneLink.dataset.wccApplied && phoneLink.href !== defaultHref) {
+        phoneLink.href = defaultHref;
       }
 
-      // Check if Google's WCC script is loaded
       if (typeof _googWccStaticApply === 'function') {
-        _googWccStaticApply('phone_number_header');
-        console.log("GTM Swap Applied");
-      } else if (attempts < 10) { 
+        try {
+          _googWccStaticApply('phone_number_header');
+          phoneLink.dataset.wccApplied = '1';
+        } catch (e) {}
+        return;
+      }
+      if (attempts < 15) {
         attempts++;
-        setTimeout(trySwap, 700); // Wait 700ms and try again
+        setTimeout(trySwap, 500);
       }
     }
     trySwap();
