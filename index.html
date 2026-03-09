@@ -803,7 +803,7 @@
     </div>
     <div class="hero_ga-ctas">
       <a href="#page-bottom" class="btn-primary">👉 Talk to Us &amp; DriveIt</a>
-      <a id="phone_number_header" href="tel:+15122701945" class="btn-ghost">📞 Call (512) 270-1945</a>
+      <a id="phone_number_header" href="tel:+15122701945" class="btn-ghost">📞 Call <span class="number-to-swap">(512) 270-1945</span></a>
     </div>
     <p class="hero_ga-note">No obligation <span>•</span> Fast response <span>•</span> Same-day pickup possible</p>
   </div>
@@ -1213,10 +1213,21 @@
 <div id="page-bottom" aria-hidden="true" style="height:0;overflow:hidden;margin-bottom:100px;"></div>
 <script>
   window.addEventListener('load', function() {
-    // This tells Google to force the swap on the specific ID we just created
-    if (typeof _googWccStaticApply === 'function') {
+    function trySwap() {
+      // 1. Fix the broken relative link manually if needed
+      var phoneLink = document.getElementById('phone_number_header');
+      if (phoneLink && !phoneLink.href.startsWith('tel:')) {
+          phoneLink.setAttribute('href', 'tel:+15122701945');
+      }
+
+      // 2. Force Google to swap the number
+      if (typeof _googWccStaticApply === 'function') {
         _googWccStaticApply('phone_number_header');
+      } else {
+        setTimeout(trySwap, 500); // Try again if script isn't ready
+      }
     }
+    trySwap();
   });
 </script>
 </body>
