@@ -1214,6 +1214,21 @@
 
 <div id="page-bottom" aria-hidden="true" style="height:0;overflow:hidden;margin-bottom:100px;"></div>
 <script>
+  // Smooth scroll to #page-bottom (works inside iframe when native hash scroll doesn't)
+  (function() {
+    function scrollToPageBottom(e) {
+      var link = e.target.closest('a[href="#page-bottom"]');
+      if (!link) return;
+      var el = document.getElementById('page-bottom');
+      if (el) {
+        e.preventDefault();
+        el.scrollIntoView({ behavior: 'smooth', block: 'end' });
+      }
+    }
+    document.addEventListener('click', scrollToPageBottom);
+  })();
+</script>
+<script>
   // ─── Pass parent URL params into iframe (for Google call conversion) ───
   // When this page is embedded in Wix, the parent has ?gclid=... but the iframe URL often does not.
   // Google's "Calls from website" script only sees this document's URL. So we try to copy params from parent.
